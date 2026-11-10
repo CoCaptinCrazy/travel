@@ -105,6 +105,39 @@ function bindDashboardSearch() {
   });
 }
 
+function bindChrome() {
+  document.querySelector("#chrome-search")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    try {
+      const destination = destinationFor(new FormData(form).get("address"));
+      window.open(destination.href, "_blank", "noopener,noreferrer");
+      form.reset();
+    } catch (error) {
+      form.querySelector("input").setCustomValidity(error.message);
+      form.reportValidity();
+      form.querySelector("input").addEventListener("input", () => {
+        form.querySelector("input").setCustomValidity("");
+      }, { once: true });
+    }
+  });
+  document.querySelector('[data-action="back"]')?.addEventListener("click", () => history.back());
+  document.querySelector('[data-action="forward"]')?.addEventListener("click", () => history.forward());
+  document.querySelector('[data-action="reload"]')?.addEventListener("click", () => location.reload());
+  document.querySelector('[data-action="new-tab"]')?.addEventListener("click", () => {
+    window.location.hash = "#/dashboard";
+    document.querySelector("#dashboard-address")?.focus();
+  });
+  document.querySelector('[data-action="fullscreen"]')?.addEventListener("click", async () => {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await document.documentElement.requestFullscreen();
+    } catch (error) {
+      console.error("Could not toggle fullscreen.", error);
+    }
+  });
+}
+
 async function renderRoute() {
   const version = ++routeVersion;
   cleanup();
@@ -118,17 +151,21 @@ async function renderRoute() {
       window.location.hash = "#/dashboard";
       if (window.location.hash === "#/dashboard") renderRoute();
     });
+    bindLogout();
     return;
   }
 
   if (route === "home" || route === "dashboard") {
     app.innerHTML = renderShell("dashboard", renderDashboard(user));
     bindDashboardSearch();
+    bindChrome();
+    startClock();
     bindLogout();
     return;
   }
 
   app.innerHTML = renderShell(route, `<div class="empty">${route === "orbit" ? "Opening your workspace…" : "Loading…"}</div>`);
+  bindChrome();
   try {
     const content = await loadView(route);
     if (version !== routeVersion) return;
@@ -178,6 +215,21 @@ async function renderRoute() {
         `<div class="notice">${error.message}</div>`;
     }
   }
+}
+
+let clockTimer;
+function startClock() {
+  window.clearInterval(clockTimer);
+  const update = () => {
+    const time = document.querySelector("#home-clock");
+    const date = document.querySelector("#home-date");
+    if (!time || !date) return;
+    const now = new Date();
+    time.textContent = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" }).format(now);
+    date.textContent = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(now);
+  };
+  update();
+  clockTimer = window.setInterval(update, 30_000);
 }
 
 function bindLogout() {

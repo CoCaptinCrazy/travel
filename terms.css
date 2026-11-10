@@ -98,3 +98,67 @@ h1 span { color: #aaa0ff; }
 }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+
+:root {
+  color: #f6e8eb;
+  background: #100709;
+}
+
+body {
+  background:
+    radial-gradient(rgb(255 104 139 / 5%) .8px, transparent .8px),
+    radial-gradient(ellipse at 18% 38%, rgb(255 82 122 / 12%), transparent 34rem),
+    #100709;
+  background-size: 30px 30px, auto, auto;
+}
+
+.welcome-topbar, .welcome-footer { border-color: #2a171c; }
+.brand-mark { background: linear-gradient(140deg, #ff90a8, #ed4e76); color: #260a12; }
+.local-badge { color: #c096a0; }
+.local-badge > span { background: #ff6b8e; box-shadow: 0 0 13px rgb(255 107 142 / 55%); }
+.eyebrow, h1 span { color: #ff7895; }
+.welcome-intro, .terms-copy p { color: #bd9ba3; }
+.feature-pills span { border-color: #382027; background: rgb(29 14 19 / 78%); color: #e2c7ce; }
+.terms-panel { border-color: #382027; background: linear-gradient(145deg, rgb(31 16 21 / 98%), rgb(20 10 14 / 98%)); }
+.terms-heading { border-color: #382027; }
+.terms-icon { border-color: #65303d; background: #30151d; color: #ff9cb2; }
+.terms-copy strong { color: #f6e8eb; }
+.agree-row { color: #e4cbd1; }
+.agree-row input { accent-color: #ff6288; }
+.continue-button { background: #ff6288; color: #260a12; }
+.continue-button:not(:disabled):hover { background: #ff83a0; }
+.welcome-footer { color: #98747d; }
+.welcome-footer a { color: #ff91a9; }
+.welcome-footer a:hover { color: #ffc0ce; }
+
+:root {
+  color: #eee5d8;
+  background: #14120f;
+}
+
+body {
+  background:
+    radial-gradient(rgb(220 178 112 / 5%) .8px, transparent .8px),
+    radial-gradient(ellipse at 18% 38%, rgb(183 118 68 / 13%), transparent 34rem),
+    #14120f;
+  background-size: 30px 30px, auto, auto;
+}
+
+.welcome-topbar, .welcome-footer { border-color: #342c22; }
+.brand-mark { background: linear-gradient(140deg, #f0bd7d, #ce764f); color: #27170e; }
+.local-badge { color: #c2ad8d; }
+.local-badge > span { background: #a9ad75; box-shadow: 0 0 13px rgb(169 173 117 / 45%); }
+.eyebrow, h1 span { color: #e1a16c; }
+.welcome-intro, .terms-copy p { color: #c0ae94; }
+.feature-pills span { border-color: #3a3023; background: rgb(33 27 20 / 78%); color: #ddcdb5; }
+.terms-panel { border-color: #3b3024; background: linear-gradient(145deg, rgb(36 29 22 / 98%), rgb(24 20 16 / 98%)); }
+.terms-heading { border-color: #3b3024; }
+.terms-icon { border-color: #765638; background: #38291c; color: #e6b57a; }
+.terms-copy strong { color: #f0e5d5; }
+.agree-row { color: #dfd0ba; }
+.agree-row input { accent-color: #df9565; }
+.continue-button { background: #df9565; color: #25170f; }
+.continue-button:not(:disabled):hover { background: #edac77; }
+.welcome-footer { color: #a18b6d; }
+.welcome-footer a { color: #e5ac76; }
+.welcome-footer a:hover { color: #f3c995; }

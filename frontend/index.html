@@ -3,13 +3,104 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#101522" />
+    <meta name="theme-color" content="#100709" />
     <meta name="description" content="TravelX browser, games, chat, and media portal." />
     <title>TravelX</title>
     <link rel="stylesheet" href="/css/main.css" />
     <script type="module" src="/js/app.js"></script>
   </head>
   <body data-page="dashboard">
-    <div id="app"></div>
+    <div id="app">
+      <div class="shell">
+        <aside class="sidebar">
+          <a class="rail-home active" href="#/dashboard" aria-label="Home">⌂</a>
+          <nav class="nav-list" aria-label="Main navigation">
+            <a class="nav-link" href="#/arcade" title="Games" aria-label="Games"><span class="nav-icon" aria-hidden="true">▧</span></a>
+            <a class="nav-link" href="#/music" title="Music" aria-label="Music"><span class="nav-icon" aria-hidden="true">♫</span></a>
+            <a class="nav-link" href="#/pulse" title="Chat" aria-label="Chat"><span class="nav-icon" aria-hidden="true">▢</span></a>
+            <a class="nav-link" href="#/nova" title="AI" aria-label="AI"><span class="nav-icon" aria-hidden="true">✧</span></a>
+            <a class="nav-link" href="#/cinema" title="Cinema" aria-label="Cinema"><span class="nav-icon" aria-hidden="true">▣</span></a>
+            <a class="nav-link" href="#/marketplace" title="Marketplace" aria-label="Marketplace"><span class="nav-icon" aria-hidden="true">⬡</span></a>
+            <span class="rail-divider" aria-hidden="true"></span>
+            <a class="nav-link" href="#/bookmarks" title="Bookmarks" aria-label="Bookmarks"><span class="nav-icon" aria-hidden="true">☆</span></a>
+            <a class="nav-link" href="#/history" title="History" aria-label="History"><span class="nav-icon" aria-hidden="true">◷</span></a>
+            <a class="nav-link" href="#/downloads" title="Downloads" aria-label="Downloads"><span class="nav-icon" aria-hidden="true">↓</span></a>
+            <a class="nav-link" href="#/profile" title="Profile" aria-label="Profile"><span class="nav-icon" aria-hidden="true">♙</span></a>
+            <a class="nav-link" href="#/settings" title="Settings" aria-label="Settings"><span class="nav-icon" aria-hidden="true">☷</span></a>
+          </nav>
+          <div class="sidebar-bottom">
+            <a class="nav-link" href="#/store" title="Store" aria-label="Store"><span class="nav-icon" aria-hidden="true">＋</span></a>
+          </div>
+        </aside>
+        <div class="main-area">
+          <header class="browser-chrome">
+            <div class="tab-strip">
+              <a class="tab-home" href="#/dashboard" aria-label="Home">⌂</a>
+              <a class="browser-tab active" href="#/dashboard"><span class="tab-favicon">T</span>Home</a>
+              <button class="new-tab" type="button" aria-label="New tab">+</button>
+              <div class="tab-spacer"></div>
+              <a class="chrome-auth" href="#/login">Sign in</a>
+            </div>
+            <div class="browser-toolbar">
+              <div class="browser-navigation">
+                <button type="button" aria-label="Back">‹</button>
+                <button type="button" aria-label="Forward">›</button>
+                <button type="button" aria-label="Reload">⟳</button>
+              </div>
+              <form class="address-bar" id="chrome-search">
+                <span class="address-lock" aria-hidden="true">⌕</span>
+                <label class="visually-hidden" for="chrome-address">Search or enter an address</label>
+                <input id="chrome-address" name="address" placeholder="Search or enter an address" autocomplete="off" />
+                <button type="submit" class="address-go" aria-label="Go">↗</button>
+              </form>
+              <div class="media-widget">
+                <span class="media-note" aria-hidden="true">♫</span><span>Nothing playing</span>
+                <button type="button" disabled aria-label="Previous track">|‹</button>
+                <button type="button" disabled aria-label="Play">▷</button>
+                <button type="button" disabled aria-label="Next track">›|</button>
+              </div>
+              <div class="toolbar-actions">
+                <a href="#/bookmarks" aria-label="Bookmarks">☆</a>
+                <button type="button" aria-label="Toggle fullscreen">⛶</button>
+              </div>
+            </div>
+          </header>
+          <main class="content" id="route-content">
+            <section class="start-page">
+              <div class="start-content">
+                <div class="start-brand">
+                  <span class="start-wordmark">travelx</span>
+                  <p>A little space, just for you.</p>
+                </div>
+                <form class="start-search" id="dashboard-search">
+                  <label class="visually-hidden" for="dashboard-address">Search or enter an address</label>
+                  <span class="start-search-icon" aria-hidden="true">⌕</span>
+                  <input id="dashboard-address" name="address" placeholder="Search for anything!" autocomplete="off" spellcheck="false" required />
+                  <button type="submit" aria-label="Search"><span aria-hidden="true">→</span></button>
+                </form>
+                <p id="dashboard-search-status" class="start-status" role="status" aria-live="polite"></p>
+                <nav class="start-shortcuts" aria-label="TravelX apps">
+                  <a class="start-shortcut" href="#/arcade"><span class="start-shortcut-icon" aria-hidden="true">▧</span><span>Games</span></a>
+                  <a class="start-shortcut" href="#/nova"><span class="start-shortcut-icon" aria-hidden="true">✧</span><span>AI</span></a>
+                  <a class="start-shortcut" href="#/music"><span class="start-shortcut-icon" aria-hidden="true">♫</span><span>Music</span></a>
+                  <a class="start-shortcut" href="#/pulse"><span class="start-shortcut-icon" aria-hidden="true">▢</span><span>Chat</span></a>
+                  <a class="start-shortcut" href="#/marketplace"><span class="start-shortcut-icon" aria-hidden="true">+</span><span>Add</span></a>
+                  <a class="start-shortcut" href="#/store"><span class="start-shortcut-icon" aria-hidden="true">▦</span><span>All Apps</span></a>
+                </nav>
+                <div class="start-badges">
+                  <a class="start-badge" href="#/profile"><span aria-hidden="true">♙</span>Private workspace</a>
+                  <a class="start-badge" href="#/settings"><span aria-hidden="true">⚙</span>Personalize <span class="badge-muted">your space</span></a>
+                </div>
+                <section class="clock-card" aria-label="Current time and date">
+                  <time class="clock-time" id="home-clock">--:--</time>
+                  <time class="clock-date" id="home-date">Your local date</time>
+                </section>
+                <p class="start-footnote">TravelX <span aria-hidden="true">·</span> External websites open directly in your browser.</p>
+              </div>
+            </section>
+          </main>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
