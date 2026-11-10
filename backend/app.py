@@ -9,6 +9,7 @@ from backend.config import (
     HOST,
     MAX_REQUEST_BYTES,
     PORT,
+    ROOT,
 )
 from backend.database import initialize
 from backend.middleware.auth import current_session
@@ -16,10 +17,10 @@ from backend.middleware.csrf import valid_csrf, valid_origin
 from backend.middleware.logging import logger
 from backend.models.response import failure
 from backend.routes import RequestContext, not_found
-from backend.routes import admin, ai, auth, browser, chat, games, movies, users
+from backend.routes import admin, ai, auth, browser, chat, games, movies, plugins, users
 
 
-ROUTES = (auth, users, browser, games, movies, chat, ai, admin)
+ROUTES = (auth, users, browser, games, movies, chat, ai, plugins, admin)
 
 
 class TravelXHandler(BaseHTTPRequestHandler):
@@ -117,11 +118,20 @@ class TravelXHandler(BaseHTTPRequestHandler):
     def _handle_static(self, request_path, head_only):
         try:
             decoded = unquote(request_path)
-            relative = "index.html" if decoded == "/" else decoded.lstrip("/")
+            if decoded in {"/", "/index.html"}:
+                root = ROOT.resolve()
+                relative = "index.html"
+                target = (root / relative).resolve()
+            elif decoded in {"/terms.css", "/terms.js"}:
+                root = ROOT.resolve()
+                relative = decoded.lstrip("/")
+                target = (root / relative).resolve()
+            else:
+                relative = decoded.removeprefix("/frontend/") if decoded.startswith("/frontend/") else decoded.lstrip("/")
+                root = FRONTEND_DIR.resolve()
+                target = (root / relative).resolve()
             if any(part.startswith(".") for part in Path(relative).parts):
                 raise ValueError("Hidden paths are not served.")
-            root = FRONTEND_DIR.resolve()
-            target = (root / relative).resolve()
             if root not in target.parents and target != root:
                 raise ValueError("Path is outside the frontend.")
             if target.is_dir():
@@ -173,7 +183,7 @@ class TravelXHandler(BaseHTTPRequestHandler):
             "Content-Security-Policy",
             "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; "
             "connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; "
-            "frame-ancestors 'none'",
+            "frame-ancestors 'none'; form-action 'self'",
         )
 
 

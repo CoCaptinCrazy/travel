@@ -15,7 +15,7 @@ import { renderDownloads } from "./downloads.js";
 import { renderMarketplace } from "./marketplace.js";
 import { renderMusic } from "./music.js";
 import { navbar } from "./navbar.js";
-import { renderNotifications } from "./notifications.js";
+import { bindNotifications, renderNotifications } from "./notifications.js";
 import { renderProfile } from "./profile.js";
 import { sidebar } from "./sidebar.js";
 import { renderStore } from "./store.js";
@@ -55,7 +55,7 @@ async function loadView(route) {
     case "watchlist":
       return renderWatchlist();
     case "pulse":
-      return renderChat();
+      return user ? renderChat() : `<section class="page-head"><p class="eyebrow">Pulse</p><h1>Room to talk</h1><p class="lead">Sign in to join local rooms and chat with other TravelX users.</p><a class="button" href="#/login">Sign in</a></section>`;
     case "nova":
       return renderAI();
     case "music":
@@ -121,7 +121,14 @@ async function renderRoute() {
     return;
   }
 
-  app.innerHTML = renderShell(route, `<div class="empty">Loading ${route}…</div>`);
+  if (route === "home" || route === "dashboard") {
+    app.innerHTML = renderShell("dashboard", renderDashboard(user));
+    bindDashboardSearch();
+    bindLogout();
+    return;
+  }
+
+  app.innerHTML = renderShell(route, `<div class="empty">${route === "orbit" ? "Opening your workspace…" : "Loading…"}</div>`);
   try {
     const content = await loadView(route);
     if (version !== routeVersion) return;
@@ -160,18 +167,11 @@ async function renderRoute() {
       case "settings":
         bindSettings();
         break;
+      case "notifications":
+        bindNotifications();
+        break;
     }
-    app.querySelector('[data-action="logout"]')?.addEventListener("click", async () => {
-      try {
-        await api("/api/auth/logout", { method: "POST", body: {} });
-        user = null;
-        setCsrfToken(null);
-        window.location.hash = "#/dashboard";
-        renderRoute();
-      } catch (error) {
-        window.alert(error.message);
-      }
-    });
+    bindLogout();
   } catch (error) {
     if (version === routeVersion) {
       document.querySelector("#route-content").innerHTML =
@@ -180,7 +180,27 @@ async function renderRoute() {
   }
 }
 
+function bindLogout() {
+  app.querySelector('[data-action="logout"]')?.addEventListener("click", async () => {
+    try {
+      await api("/api/auth/logout", { method: "POST", body: {} });
+      user = null;
+      setCsrfToken(null);
+      window.location.hash = "#/dashboard";
+      renderRoute();
+    } catch (error) {
+      window.alert(error.message);
+    }
+  });
+}
+
 async function initialize() {
+  if (localStorage.getItem("travelx-terms-accepted-1") !== "yes") {
+    window.location.replace("/");
+    return;
+  }
+
+  await renderRoute();
   try {
     const session = await api("/api/me");
     user = session.user;
@@ -189,6 +209,7 @@ async function initialize() {
       try {
         const profile = await api("/api/profile");
         document.body.classList.toggle("light", profile.settings.theme === "light");
+        document.body.classList.toggle("compact", Boolean(profile.settings.compactMode));
       } catch (error) {
         console.error("Could not load saved TravelX preferences.", error);
       }

@@ -9,6 +9,7 @@
   "scripts": {
     "start": "python -m backend.app",
     "dev": "python -m backend.app",
-    "build": "python -m compileall -q backend"
+    "build": "python -m compileall -q backend",
+    "test": "python -m unittest discover -s tests"
   }
 }

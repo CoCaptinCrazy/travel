@@ -12,7 +12,13 @@ def valid_web_url(value):
         return False
     try:
         parsed = urlsplit(value)
-        return parsed.scheme in {"http", "https"} and bool(parsed.hostname)
+        return (
+            parsed.scheme in {"http", "https"}
+            and bool(parsed.hostname)
+            and parsed.username is None
+            and parsed.password is None
+            and (parsed.port is None or 1 <= parsed.port <= 65535)
+        )
     except ValueError:
         return False
 

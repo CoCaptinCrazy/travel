@@ -31,6 +31,7 @@ export function bindChat(setCleanup) {
     try {
       const rooms = await getRooms();
       const target = document.querySelector("#chat-rooms-list");
+      if (!target) return;
       target.innerHTML = rooms.map((room) => `<button class="chat-room${room.id === roomId ? " active" : ""}" type="button" data-room-id="${room.id}"># ${escapeHTML(room.name)}</button>`).join("");
       target.querySelectorAll("[data-room-id]").forEach((button) => {
         button.addEventListener("click", () => {
@@ -43,7 +44,8 @@ export function bindChat(setCleanup) {
         });
       });
     } catch (error) {
-      document.querySelector("#chat-rooms-list").innerHTML = emptyState(error.message);
+      const target = document.querySelector("#chat-rooms-list");
+      if (target) target.innerHTML = emptyState(error.message);
     }
   };
   loadMessages();
@@ -72,7 +74,8 @@ export function bindChat(setCleanup) {
       form.reset();
       await loadRooms();
     } catch (error) {
-      document.querySelector("#chat-rooms-list").prepend(Object.assign(document.createElement("p"), { className: "form-error", textContent: error.message }));
+      const target = document.querySelector("#chat-rooms-list");
+      target?.prepend(Object.assign(document.createElement("p"), { className: "form-error", textContent: error.message }));
     }
   });
 
@@ -96,6 +99,7 @@ export function bindChat(setCleanup) {
 
 async function loadFriendList() {
   const target = document.querySelector("#friends-list");
+  if (!target) return;
   try {
     target.innerHTML = await renderFriends();
     bindFriendActions();

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101522" />
+    <meta name="description" content="TravelX terms of use and local account agreement." />
+    <title>Welcome to TravelX</title>
+    <link rel="stylesheet" href="/terms.css" />
+    <script src="/terms.js" defer></script>
+  </head>
+  <body>
+    <main class="welcome-layout">
+      <header class="welcome-topbar">
+        <a class="brand" href="/" aria-label="TravelX home">
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span>TravelX</span>
+        </a>
+        <span class="local-badge"><span aria-hidden="true"></span> Local-first workspace</span>
+      </header>
+
+      <section class="welcome-card" aria-labelledby="welcome-title">
+        <div class="welcome-copy">
+          <p class="eyebrow">A better place to start</p>
+          <h1 id="welcome-title">Welcome to<br /><span>your TravelX.</span></h1>
+          <p class="welcome-intro">
+            One calm home for your web shortcuts, saved links, games, media lists,
+            and community.
+          </p>
+          <div class="feature-pills" aria-label="TravelX features">
+            <span>Orbit browser</span><span>Arcade</span><span>Pulse chat</span><span>And more</span>
+          </div>
+        </div>
+
+        <section class="terms-panel" aria-labelledby="terms-title">
+          <div class="terms-heading">
+            <span class="terms-icon" aria-hidden="true">✓</span>
+            <div>
+              <p class="eyebrow">Before you continue</p>
+              <h2 id="terms-title">A few ground rules</h2>
+            </div>
+          </div>
+          <div class="terms-copy">
+            <p><strong>Use it responsibly.</strong> Follow the rules that apply to your device, network, and location.</p>
+            <p><strong>External sites stay external.</strong> Links open directly in your browser. TravelX does not proxy or embed them.</p>
+            <p><strong>Be respectful.</strong> Do not use chat or other features to harass, threaten, or share someone’s private information.</p>
+            <p><strong>Your local account is yours.</strong> Keep your password private. This starter is for local development and is not a production hosting service.</p>
+            <p><strong>Use content you have permission to use.</strong> TravelX’s sample catalog entries are placeholders, not hosted media or games.</p>
+          </div>
+          <form id="terms-form">
+            <label class="agree-row">
+              <input id="agree-terms" name="agree" type="checkbox" required />
+              <span>I’ve read these notes and agree to continue.</span>
+            </label>
+            <p class="terms-error" id="terms-error" role="status" aria-live="polite"></p>
+            <button class="continue-button" id="continue-button" type="submit" disabled>
+              Continue to TravelX <span aria-hidden="true">→</span>
+            </button>
+          </form>
+          <p class="terms-version">You can review these notes again by returning to this page.</p>
+        </section>
+      </section>
+
+      <footer class="welcome-footer">
+        <span>TravelX <span aria-hidden="true">·</span> Your space, your next stop.</span>
+        <a href="/frontend/index.html">Open workspace</a>
+      </footer>
+    </main>
+  </body>
+</html>

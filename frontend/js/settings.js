@@ -22,6 +22,7 @@ export function bindSettings() {
     try {
       await api("/api/settings", { method: "PATCH", body: { settings } });
       document.body.classList.toggle("light", settings.theme === "light");
+      document.body.classList.toggle("compact", settings.compactMode);
       showMessage(message, "Settings saved.");
     } catch (error) {
       showMessage(message, error.message, true);

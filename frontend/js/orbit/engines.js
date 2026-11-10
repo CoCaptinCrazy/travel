@@ -1,10 +1,10 @@
 export function destinationFor(value) {
   const query = value.trim();
   if (!query) throw new Error("Enter a search or web address.");
-  if (/^[a-z][a-z\d+.-]*:/i.test(query) && !/^https?:\/\//i.test(query)) {
+  const addressPattern = /^(localhost|(?:[\w-]+\.)+[a-z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d{1,5})?(?:[/?#].*)?$/i;
+  if (/^[a-z][a-z\d+.-]*:/i.test(query) && !/^https?:\/\//i.test(query) && !addressPattern.test(query)) {
     throw new Error("Only HTTP and HTTPS websites are supported.");
   }
-  const addressPattern = /^(localhost|(?:[\w-]+\.)+[a-z]{2,}|(?:\d{1,3}\.){3}\d{1,3})(?::\d{1,5})?(?:[/?#].*)?$/i;
   const address = /^https?:\/\//i.test(query)
     ? query
     : addressPattern.test(query)
@@ -16,7 +16,7 @@ export function destinationFor(value) {
   } catch (error) {
     throw new Error("That address doesn't look valid. Try a search instead.");
   }
-  if (!["http:", "https:"].includes(destination.protocol) || !destination.hostname) {
+  if (!["http:", "https:"].includes(destination.protocol) || !destination.hostname || destination.username || destination.password) {
     throw new Error("Only valid HTTP and HTTPS websites are supported.");
   }
   return destination;

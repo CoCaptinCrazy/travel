@@ -20,6 +20,8 @@ Register an account from the page. Passwords are stored as salted scrypt hashes.
 
 To grant administrator access to an existing account, run `python -m backend.admin_cli USERNAME` from the project directory.
 
+Run the local helper tests with `python -m unittest discover -s tests`. The same command is available through `npm test` if npm is installed.
+
 ## Notes
 
 - The browser opens web addresses directly in the user's browser; TravelX does not proxy or embed external websites.

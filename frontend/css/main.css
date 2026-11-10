@@ -117,6 +117,9 @@ p { color: var(--muted); line-height: 1.65; }
 .review { padding: 10px 12px; border-radius: 9px; background: #20283a; font-size: 12px; }
 .review strong { margin-left: 9px; }
 .review p { margin: 5px 0 0; font-size: 12px; }
+.compact .content { padding-top: 26px; }
+.compact .card { padding: 14px; }
+.compact .grid { gap: 9px; }
 .mobile-toggle { display: none; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
@@ -148,7 +151,8 @@ body.light .list-item { background: #fbfbfd; }
   .brand, .sidebar-bottom { display: none; }
   .nav-list { display: flex; width: 100%; justify-content: space-around; }
   .nav-link { width: 43px; height: 43px; }
-  .nav-link:nth-child(n+6) { display: none; }
+  .nav-list { justify-content: flex-start; overflow-x: auto; }
+  .nav-link { flex: 0 0 43px; }
   .main-area { padding-bottom: 62px; }
   .topbar { min-height: 58px; padding: 0 16px; }
   .content { width: min(100% - 30px, 1050px); padding-top: 31px; }

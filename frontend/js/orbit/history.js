@@ -3,7 +3,6 @@ import { emptyState, escapeHTML, pageHead } from "../helpers.js";
 
 export async function renderHistory() {
   const content = `${pageHead("Orbit browser", "Browsing history", "Your recent addresses opened from TravelX.")}<div class="button-row history-actions"><button class="button danger small-button" id="clear-history" type="button">Clear history</button></div><div id="history-list">${emptyState("Loading history…")}</div>`;
-  queueMicrotask(loadHistory);
   return content;
 }
 
@@ -18,6 +17,7 @@ async function loadHistory() {
 }
 
 export function bindHistory() {
+  loadHistory();
   document.querySelector("#clear-history")?.addEventListener("click", async () => {
     const button = document.querySelector("#clear-history");
     button.disabled = true;
