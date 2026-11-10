@@ -1,0 +1,202 @@
+travelx/
+│
+├── README.md
+├── LICENSE
+├── .gitignore
+├── package.json
+├── requirements.txt
+├── .env
+│
+├── frontend/
+│   │
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── dashboard.html
+│   │
+│   ├── pages/
+│   │   ├── orbit.html
+│   │   ├── arcade.html
+│   │   ├── cinema.html
+│   │   ├── pulse.html
+│   │   ├── nova.html
+│   │   ├── music.html
+│   │   ├── marketplace.html
+│   │   ├── downloads.html
+│   │   ├── profile.html
+│   │   ├── settings.html
+│   │   ├── admin.html
+│   │   └── store.html
+│   │
+│   ├── components/
+│   │   ├── navbar.html
+│   │   ├── sidebar.html
+│   │   ├── tabs.html
+│   │   ├── modal.html
+│   │   ├── notification.html
+│   │   └── footer.html
+│   │
+│   ├── css/
+│   │   ├── main.css
+│   │   ├── navbar.css
+│   │   ├── sidebar.css
+│   │   ├── tabs.css
+│   │   ├── dashboard.css
+│   │   ├── orbit.css
+│   │   ├── pulse.css
+│   │   ├── nova.css
+│   │   ├── auth.css
+│   │   ├── themes.css
+│   │   └── admin.css
+│   │
+│   ├── js/
+│   │   ├── app.js
+│   │   ├── auth.js
+│   │   ├── tabs.js
+│   │   ├── sidebar.js
+│   │   ├── navbar.js
+│   │   ├── notifications.js
+│   │   ├── settings.js
+│   │   │
+│   │   ├── orbit/
+│   │   │   ├── browser.js
+│   │   │   ├── history.js
+│   │   │   ├── bookmarks.js
+│   │   │   ├── downloads.js
+│   │   │   └── engines.js
+│   │   │
+│   │   ├── pulse/
+│   │   │   ├── chat.js
+│   │   │   ├── rooms.js
+│   │   │   ├── friends.js
+│   │   │   └── websocket.js
+│   │   │
+│   │   ├── nova/
+│   │   │   ├── ai.js
+│   │   │   ├── prompts.js
+│   │   │   └── models.js
+│   │   │
+│   │   ├── arcade/
+│   │   │   ├── games.js
+│   │   │   ├── favorites.js
+│   │   │   └── ratings.js
+│   │   │
+│   │   └── cinema/
+│   │       ├── movies.js
+│   │       ├── reviews.js
+│   │       └── watchlist.js
+│   │
+│   └── assets/
+│       ├── logos/
+│       ├── icons/
+│       ├── wallpapers/
+│       ├── avatars/
+│       ├── banners/
+│       └── screenshots/
+│
+├── backend/
+│   │
+│   ├── app.py
+│   ├── config.py
+│   ├── database.py
+│   │
+│   ├── routes/
+│   │   ├── auth.py
+│   │   ├── users.py
+│   │   ├── games.py
+│   │   ├── movies.py
+│   │   ├── chat.py
+│   │   ├── ai.py
+│   │   ├── browser.py
+│   │   └── admin.py
+│   │
+│   ├── websocket/
+│   │   ├── chat_socket.py
+│   │   ├── notification_socket.py
+│   │   └── presence_socket.py
+│   │
+│   ├── middleware/
+│   │   ├── auth.py
+│   │   ├── csrf.py
+│   │   └── logging.py
+│   │
+│   ├── models/
+│   │   ├── user.py
+│   │   ├── friend.py
+│   │   ├── message.py
+│   │   ├── notification.py
+│   │   ├── movie.py
+│   │   └── game.py
+│   │
+│   └── services/
+│       ├── auth_service.py
+│       ├── ai_service.py
+│       ├── chat_service.py
+│       ├── search_service.py
+│       └── storage_service.py
+│
+├── databases/
+│   ├── travelx.db
+│   ├── backups/
+│   └── migrations/
+│
+├── modules/
+│   │
+│   ├── orbit/
+│   │   ├── tabs/
+│   │   ├── history/
+│   │   ├── bookmarks/
+│   │   ├── downloads/
+│   │   └── sessions/
+│   │
+│   ├── ultraviolet/
+│   │   ├── public/
+│   │   ├── service/
+│   │   └── config/
+│   │
+│   └── scramjet/
+│       ├── public/
+│       ├── workers/
+│       └── config/
+│
+├── ai/
+│   ├── prompts/
+│   ├── personas/
+│   ├── moderation/
+│   └── memory/
+│
+├── games/
+│   ├── action/
+│   ├── racing/
+│   ├── puzzle/
+│   ├── multiplayer/
+│   └── metadata/
+│
+├── movies/
+│   ├── posters/
+│   ├── metadata/
+│   ├── trailers/
+│   └── reviews/
+│
+├── uploads/
+│   ├── avatars/
+│   ├── banners/
+│   ├── screenshots/
+│   └── attachments/
+│
+├── plugins/
+│   ├── plugin_loader.py
+│   ├── music/
+│   ├── themes/
+│   └── extensions/
+│
+├── docs/
+│   ├── api.md
+│   ├── database.md
+│   ├── deployment.md
+│   └── architecture.md
+│
+└── docker/
+    ├── Dockerfile
+    ├── docker-compose.yml
+    └── nginx.conf
