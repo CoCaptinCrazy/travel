@@ -14,6 +14,10 @@ All API routes are same-origin and return JSON in the form `{ "ok": true, "data"
 | Marketplace | `GET /api/plugins` |
 | Admin | `GET /api/admin/stats`, `GET /api/admin/users` |
 
-AI requests return an explicit unavailable response until a provider is configured. No provider credentials are included.
+Nova uses `GEMINI_API_KEY` first and, if Gemini fails, falls back to the GitHub Copilot SDK when enabled. The SDK uses the local Copilot CLI sign-in or `COPILOT_GITHUB_TOKEN`; there is no separate Copilot API key. Copilot is configured with no tools or workspace context. Provider credentials remain server-side, and placeholder credentials are treated as unconfigured.
+
+Cinema uses local sample metadata without a `TMDB_API_KEY`; with a valid key, `GET /api/movies?q={query}` searches TMDB and `GET /api/movies` returns popular titles. TMDB metadata is persisted locally so watchlists and reviews work for those titles. TravelX does not provide movie streams.
+
+Music playback is embedded in the browser from public Spotify, YouTube Music, and SoundCloud URLs. Their API credentials in `.env` are optional and are not needed for official embeds; TravelX does not host or download music.
 
 Pulse channels include category, read-role, and write-role metadata. Members can use public channels, moderators can create channels and post in announcements, and admins can assign or remove moderator roles. The staff channel is restricted to moderators and admins.

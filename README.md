@@ -1,6 +1,6 @@
 # TravelX
 
-TravelX is a local-first web portal with accounts, a browser start page, bookmarks and history, a small offline game, watchlists, and room-based chat. It uses a Python standard-library backend and SQLite; no Node packages or third-party services are required.
+TravelX is a local-first web portal with accounts, a browser start page, bookmarks and history, built-in games, movie search and watchlists, music embeds, AI assistance, and room-based chat. Its backend uses Python's standard library and SQLite; optional AI and movie metadata integrations use credentials in `.env`.
 
 ## Requirements
 
@@ -18,6 +18,8 @@ Then open [http://127.0.0.1:3000](http://127.0.0.1:3000). The server binds to lo
 
 Optional local settings can go in the repository-root `.env` file. Existing process environment variables take precedence. Keep secrets in `.env`; it is excluded from version control.
 
+Copy `.env.example` to `.env` and replace placeholder values to enable optional services. Install dependencies with `python -m pip install -r requirements.txt` to enable the Copilot SDK fallback. Nova tries Gemini first and then GitHub Copilot through the SDK; this uses Copilot CLI authentication or a GitHub token, not a separate Copilot API key. Cinema uses TMDB for movie metadata only. Music embeds public Spotify, YouTube Music, or SoundCloud links through their official players; its listed API credentials are optional and not required for embeds.
+
 Register an account from the page. Passwords are stored as salted scrypt hashes. The local database is created at `databases/travelx.db`; it is runtime data and should not be committed.
 
 To grant administrator access to an existing account, run `python -m backend.admin_cli USERNAME` from the project directory.
@@ -27,6 +29,7 @@ Run the local helper tests with `python -m unittest discover -s tests`. The same
 ## Notes
 
 - The browser opens web addresses directly in the user's browser; TravelX does not proxy or embed external websites.
-- Chat is local and refreshes by polling. The AI page reports a clear unavailable status until an AI provider is deliberately integrated.
-- Games and movie listings are sample local metadata, not hosted game or movie content.
+- Chat is local and refreshes by polling. Nova sends prompts to configured providers; prompts and provider credentials are sent only to those providers.
+- Arcade includes locally implemented games. Cinema uses sample metadata until TMDB is configured; it links to trailer search results and does not host or stream films.
+- Music embeds public content using official third-party players. Playback depends on each provider and its account/region requirements.
 - This is a local development starter, not a production deployment. Use HTTPS, backups, and a production-grade server before exposing it to a network.

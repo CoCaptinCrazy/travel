@@ -10,6 +10,7 @@ class RequestContext:
     path: str
     data: dict
     session: dict | None
+    query_string: str = ""
 
     @property
     def user(self):

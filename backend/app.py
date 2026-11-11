@@ -48,7 +48,7 @@ class TravelXHandler(BaseHTTPRequestHandler):
     def _handle_request(self, head_only=False):
         parsed = urlsplit(self.path)
         if parsed.path.startswith("/api/"):
-            self._handle_api(parsed.path, head_only)
+            self._handle_api(parsed.path, head_only, parsed.query)
             return
         if self.command not in {"GET", "HEAD"}:
             self._send_json(failure("Method not allowed.", 405), head_only)
@@ -76,7 +76,7 @@ class TravelXHandler(BaseHTTPRequestHandler):
             raise ValueError("Request body must be a JSON object.")
         return data
 
-    def _handle_api(self, path, head_only):
+    def _handle_api(self, path, head_only, query_string=""):
         if self.command not in {"GET", "HEAD", "POST", "PATCH", "DELETE"}:
             self._send_json(failure("Method not allowed.", 405), head_only)
             return
@@ -102,7 +102,9 @@ class TravelXHandler(BaseHTTPRequestHandler):
             self._send_json(failure("Your session token is missing or expired. Refresh and try again.", 403), head_only)
             return
 
-        context = RequestContext(self, self.command, path, data, session)
+        context = RequestContext(
+            self, self.command, path, data, session, query_string=query_string
+        )
         try:
             for route in ROUTES:
                 result = route.handle(context)
@@ -181,8 +183,11 @@ class TravelXHandler(BaseHTTPRequestHandler):
         self.send_header("X-Frame-Options", "DENY")
         self.send_header(
             "Content-Security-Policy",
-            "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; "
-            "connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; "
+            "default-src 'self'; script-src 'self'; style-src 'self'; "
+            "img-src 'self' data: https://image.tmdb.org; connect-src 'self'; "
+            "frame-src https://open.spotify.com https://w.soundcloud.com "
+            "https://www.youtube-nocookie.com https://www.youtube.com; "
+            "object-src 'none'; base-uri 'self'; "
             "frame-ancestors 'none'; form-action 'self'",
         )
 

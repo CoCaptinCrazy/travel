@@ -13,7 +13,7 @@ import { bindSettings, renderSettings } from "./settings.js";
 import { renderDashboard } from "./dashboard.js";
 import { renderDownloads } from "./downloads.js";
 import { renderMarketplace } from "./marketplace.js";
-import { renderMusic } from "./music.js";
+import { bindMusic, renderMusic } from "./music.js";
 import { navbar } from "./navbar.js";
 import { bindNotifications, renderNotifications } from "./notifications.js";
 import { renderProfile } from "./profile.js";
@@ -200,6 +200,9 @@ async function renderRoute() {
         break;
       case "nova":
         bindAI();
+        break;
+      case "music":
+        bindMusic();
         break;
       case "settings":
         bindSettings();
