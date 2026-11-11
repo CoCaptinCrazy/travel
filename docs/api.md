@@ -9,9 +9,11 @@ All API routes are same-origin and return JSON in the form `{ "ok": true, "data"
 | Browser | `GET/POST /api/bookmarks`, `DELETE /api/bookmarks/{id}`, `GET/POST/DELETE /api/history` |
 | Games | `GET /api/games`, `POST /api/games/{id}/rating` |
 | Cinema | `GET /api/movies`, `GET/POST /api/movies/{id}/reviews`, `GET /api/watchlist`, `POST/DELETE /api/watchlist/{id}` |
-| Pulse | `GET/POST /api/chat/rooms`, `GET/POST /api/chat/rooms/{id}/messages`, `GET/POST /api/friends`, `PATCH /api/friends/{id}/accept` |
+| Pulse | `GET/POST /api/chat/rooms`, `GET/POST /api/chat/rooms/{id}/messages`, `GET /api/chat/members`, `PATCH /api/chat/members/{id}/role` (admins), `GET/POST /api/friends`, `PATCH /api/friends/{id}/accept` |
 | Nova | `GET /api/ai/models`, `GET /api/ai/prompts`, `POST /api/ai/chat` |
 | Marketplace | `GET /api/plugins` |
 | Admin | `GET /api/admin/stats`, `GET /api/admin/users` |
 
 AI requests return an explicit unavailable response until a provider is configured. No provider credentials are included.
+
+Pulse channels include category, read-role, and write-role metadata. Members can use public channels, moderators can create channels and post in announcements, and admins can assign or remove moderator roles. The staff channel is restricted to moderators and admins.

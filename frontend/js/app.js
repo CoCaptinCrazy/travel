@@ -55,7 +55,7 @@ async function loadView(route) {
     case "watchlist":
       return renderWatchlist();
     case "pulse":
-      return user ? renderChat() : `<section class="page-head"><p class="eyebrow">Pulse</p><h1>Room to talk</h1><p class="lead">Sign in to join local rooms and chat with other TravelX users.</p><a class="button" href="#/login">Sign in</a></section>`;
+      return user ? renderChat(user) : `<section class="page-head"><p class="eyebrow">Pulse</p><h1>Room to talk</h1><p class="lead">Sign in to join local rooms and chat with other TravelX users.</p><a class="button" href="#/login">Sign in</a></section>`;
     case "nova":
       return renderAI();
     case "music":
@@ -196,7 +196,7 @@ async function renderRoute() {
         bindWatchlist();
         break;
       case "pulse":
-        if (user) bindChat((fn) => { cleanup = fn; });
+        if (user) bindChat((fn) => { cleanup = fn; }, user);
         break;
       case "nova":
         bindAI();

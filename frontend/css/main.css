@@ -825,3 +825,156 @@ body.light .destination-copy small, body.light .destination-note { color: #7d6a5
   .destination-copy small { font-size: 6px; }
   .start-footnote { flex-direction: column; gap: 5px; padding-top: 9px; }
 }
+
+.chrome-auth-links { display: flex; align-items: center; gap: 7px; }
+.chrome-auth-primary { border-color: #9c7048; background: #d99462; color: #281d14; font-weight: 700; }
+.chrome-auth-primary:hover { border-color: #bd8054; background: #edb27b; color: #281d14; }
+.field-hint { color: #a39279; font-size: 10px; }
+#auth-form > .button { width: 100%; }
+#auth-form > .button:disabled { cursor: wait; opacity: .7; }
+
+body.light .field-hint { color: #78684f; }
+
+@media (max-width: 600px) {
+  .chrome-auth-links { gap: 4px; }
+  .chrome-auth { max-width: 105px; padding: 7px 8px; font-size: 9px; }
+}
+
+.pulse-page { width: min(100% - 40px, 1440px); max-width: none; margin: 0 auto; padding: 30px 0 42px; }
+.pulse-page > .page-head { margin: 0 0 19px; }
+.pulse-page > .page-head h1 { margin-bottom: 5px; font-size: clamp(24px, 3vw, 32px); }
+.pulse-page > .page-head .lead { font-size: 12px; }
+.pulse-workspace { min-height: min(690px, calc(100vh - 230px)); display: grid; grid-template-columns: minmax(205px, 245px) minmax(0, 1fr) minmax(210px, 255px); overflow: hidden; border: 1px solid #3a3025; border-radius: 17px; background: #17140f; box-shadow: 0 18px 48px rgb(0 0 0 / 14%); }
+.pulse-channel-sidebar, .pulse-member-sidebar { min-width: 0; display: flex; flex-direction: column; background: #191610; }
+.pulse-channel-sidebar { border-right: 1px solid #342c21; }
+.pulse-member-sidebar { border-left: 1px solid #342c21; padding: 18px 14px; }
+.pulse-sidebar-heading { display: flex; align-items: center; gap: 10px; padding: 18px 15px 16px; border-bottom: 1px solid #30291f; }
+.pulse-mark { width: 33px; height: 33px; display: grid; place-items: center; border: 1px solid #684b35; border-radius: 11px; background: #302419; color: #e4a36f; font-size: 17px; }
+.pulse-sidebar-heading div, .pulse-self > div { min-width: 0; display: grid; gap: 3px; }
+.pulse-sidebar-heading strong { color: #eee2d0; font-size: 11px; }
+.pulse-sidebar-heading small, .pulse-self small { color: #9e8d74; font-size: 9px; }
+.pulse-section-label { display: flex; align-items: center; justify-content: space-between; margin: 17px 13px 8px; color: #9c896e; font-size: 8px; font-weight: 750; letter-spacing: .14em; }
+.pulse-add-channel { width: 23px; height: 23px; display: grid; place-items: center; border: 1px solid #4b3b29; border-radius: 7px; background: #261e15; color: #d7a170; font-size: 15px; }
+.pulse-add-channel:hover { border-color: #9c7048; background: #34271a; }
+.pulse-add-channel[hidden], .pulse-create-form[hidden] { display: none; }
+.pulse-channel-list { min-height: 0; flex: 1; overflow: auto; padding: 0 8px 12px; }
+.pulse-channel-group { margin: 10px 0 16px; }
+.pulse-channel-group h3 { margin: 0 7px 6px; color: #88765f; font-size: 8px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+.pulse-channel { width: 100%; min-width: 0; display: flex; align-items: center; gap: 8px; margin: 2px 0; padding: 9px 9px; border: 0; border-radius: 8px; background: transparent; color: #b7a58d; text-align: left; font-size: 11px; }
+.pulse-channel > span:first-child { color: #a68b69; font-size: 14px; }
+.pulse-channel > span:nth-child(2) { overflow: hidden; flex: 1; text-overflow: ellipsis; white-space: nowrap; }
+.pulse-channel:hover, .pulse-channel.active { background: #2b2319; color: #f0dfc7; }
+.pulse-channel.active { box-shadow: inset 2px 0 #d99562; }
+.pulse-channel-lock { color: #bc8c5c; font-size: 11px; }
+.pulse-channel small { color: #9b876b; font-size: 9px; }
+.pulse-create-form { display: grid; gap: 2px; padding: 12px; border-top: 1px solid #342c21; background: #211b13; }
+.pulse-create-form .field { gap: 5px; margin-bottom: 6px; color: #c1ae92; font-size: 9px; }
+.pulse-create-form .input, .pulse-create-form .select { padding: 8px; border-color: #473a29; border-radius: 7px; background: #17140f; color: #eee2d0; font-size: 10px; }
+.pulse-create-form .button { justify-self: start; margin-top: 4px; }
+.pulse-create-form .form-error { min-height: 0; margin: 3px 0 0; font-size: 9px; }
+.pulse-friends { padding: 0 12px 12px; border-top: 1px solid #30291f; }
+.pulse-friends > .pulse-section-label { margin: 12px 0 8px; }
+.pulse-friend-form { display: flex; gap: 5px; }
+.pulse-friend-form .input { min-width: 0; padding: 8px; border-color: #443726; background: #17140f; font-size: 9px; }
+.pulse-friend-form .button { min-height: 32px; padding: 0 9px; font-size: 9px; }
+.pulse-friends #friend-status { min-height: 0; margin: 4px 0; font-size: 9px; }
+.pulse-friend-list { max-height: 95px; overflow: auto; }
+.pulse-friend-list .list-item { padding: 7px 8px; border: 0; background: transparent; font-size: 9px; }
+.pulse-friend-list .empty { padding: 10px 3px; border: 0; font-size: 9px; }
+.pulse-self { display: flex; align-items: center; gap: 9px; margin-top: auto; padding: 12px 14px; border-top: 1px solid #342c21; }
+.pulse-self strong { overflow: hidden; color: #e6d9c5; font-size: 10px; text-overflow: ellipsis; }
+.pulse-avatar { width: 31px; height: 31px; flex: 0 0 31px; display: grid; place-items: center; border: 1px solid #65513a; border-radius: 10px; background: linear-gradient(145deg, #4a3a29, #2a2118); color: #e5b27e; font-size: 11px; font-weight: 750; }
+.pulse-conversation { min-width: 0; min-height: 0; display: flex; flex-direction: column; background: #15120e; }
+.pulse-channel-header { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid #30291f; }
+.pulse-channel-title { min-width: 0; display: flex; align-items: center; gap: 10px; }
+.pulse-hash { color: #d59968; font-size: 24px; }
+.pulse-channel-title h2 { overflow: hidden; margin: 0 0 3px; color: #eee2d0; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.pulse-channel-title p { overflow: hidden; max-width: 390px; margin: 0; color: #99876e; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.pulse-message-search { width: min(38%, 220px); height: 34px; display: flex; align-items: center; gap: 7px; padding: 0 9px; border: 1px solid #382f23; border-radius: 9px; background: #1c1812; color: #ba966c; }
+.pulse-message-search > span:first-child { font-size: 16px; }
+.pulse-message-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #eadcc7; font-size: 9px; }
+.pulse-message-search input::placeholder { color: #88775f; }
+.pulse-message-list { min-height: 240px; flex: 1; display: flex; flex-direction: column; gap: 3px; overflow: auto; padding: 17px 18px; }
+.pulse-message { display: flex; gap: 10px; padding: 10px 9px; border-radius: 10px; }
+.pulse-message:hover { background: #201b14; }
+.pulse-message .pulse-avatar { width: 34px; height: 34px; flex-basis: 34px; }
+.pulse-message-body { min-width: 0; flex: 1; }
+.pulse-message-body header { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.pulse-message-body header > strong { color: #e8dcc9; font-size: 10px; }
+.pulse-message-body time { color: #82745f; font-size: 8px; }
+.pulse-message-body > p { overflow-wrap: anywhere; margin: 5px 0 0; color: #d4c7b3; font-size: 11px; line-height: 1.55; white-space: pre-wrap; }
+.pulse-role-chip { display: inline-flex; align-items: center; padding: 3px 6px; border: 1px solid #40331f; border-radius: 5px; background: #272015; color: #ba976c; font-size: 7px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+.pulse-role-admin { border-color: #745138; background: #38281b; color: #e1a56f; }
+.pulse-role-moderator { border-color: #4a6047; background: #222c20; color: #a3bf8a; }
+.pulse-role-member { color: #a39179; }
+.pulse-compose { display: flex; gap: 8px; margin: 0 16px; padding: 7px; border: 1px solid #453826; border-radius: 11px; background: #1c1812; }
+.pulse-compose .input { min-width: 0; border: 0; background: transparent; font-size: 10px; }
+.pulse-compose .input:focus { border: 0; }
+.pulse-compose .input::placeholder { color: #88775f; }
+.pulse-compose .button { min-height: 34px; padding: 0 12px; border-radius: 8px; font-size: 9px; }
+.pulse-compose .button:disabled, .pulse-compose .input:disabled { cursor: not-allowed; opacity: .55; }
+.pulse-chat-status { min-height: 14px; margin: 0; padding: 0 17px; color: #c79868; font-size: 9px; }
+.pulse-permission-note { padding-top: 7px; }
+.pulse-composer-hint { margin: 7px 18px 12px; color: #746650; font-size: 8px; }
+.pulse-member-heading { display: flex; align-items: center; gap: 9px; padding: 0 0 14px; border-bottom: 1px solid #342c21; color: #c39b6c; }
+.pulse-member-heading > span { font-size: 17px; }
+.pulse-member-heading h2 { margin: 0; color: #eadcc8; font-size: 12px; }
+.pulse-member-heading small { color: #907e64; font-size: 8px; }
+.pulse-role-heading { margin: 16px 0 7px; color: #b58b61; font-size: 8px; font-weight: 750; letter-spacing: .13em; }
+.moderator-role-heading { color: #9fb47c; }
+.member-role-heading { color: #94836b; }
+.pulse-member-list { display: grid; gap: 5px; }
+.pulse-member { min-width: 0; display: flex; align-items: center; gap: 6px; padding: 5px 4px; border-radius: 8px; }
+.pulse-member:hover { background: #211b14; }
+.pulse-member .pulse-avatar { width: 26px; height: 26px; flex-basis: 26px; border-radius: 8px; font-size: 9px; }
+.pulse-member-name { overflow: hidden; min-width: 0; flex: 1; color: #d4c5ae; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.pulse-member .pulse-role-chip { padding: 2px 4px; font-size: 6px; }
+.pulse-role-select { max-width: 78px; padding: 4px 3px; border: 1px solid #403522; border-radius: 6px; background: #1b1711; color: #c2a982; font-size: 7px; }
+.pulse-empty-role { margin: 0 0 5px; color: #82745f; font-size: 8px; }
+.pulse-role-help { margin: auto 0 0; padding-top: 15px; color: #81725c; font-size: 8px; line-height: 1.5; }
+.pulse-workspace .empty { margin: auto; padding: 16px; border-color: #403522; color: #a08d71; font-size: 10px; }
+.pulse-friend-list .form-error { padding: 7px; font-size: 9px; }
+
+body.light .pulse-workspace { border-color: #dfd1bd; background: #fffaf2; }
+body.light .pulse-channel-sidebar, body.light .pulse-member-sidebar { background: #f7f0e5; }
+body.light .pulse-conversation { background: #fffcf6; }
+body.light .pulse-sidebar-heading strong, body.light .pulse-channel-title h2, body.light .pulse-member-heading h2, body.light .pulse-self strong { color: #3e3223; }
+body.light .pulse-channel:hover, body.light .pulse-channel.active, body.light .pulse-message:hover, body.light .pulse-member:hover { background: #efe4d2; }
+body.light .pulse-message-body header > strong, body.light .pulse-message-body > p, body.light .pulse-member-name { color: #4c3d2c; }
+body.light .pulse-create-form, body.light .pulse-message-search, body.light .pulse-compose { border-color: #dfd1bd; background: #f7f0e5; }
+body.light .pulse-create-form .input, body.light .pulse-create-form .select, body.light .pulse-friend-form .input, body.light .pulse-role-select { border-color: #dfd1bd; background: #fffaf2; color: #3e3223; }
+body.light .pulse-channel-title p { color: #78684f; }
+
+@media (max-width: 1050px) {
+  .pulse-workspace { grid-template-columns: 195px minmax(0, 1fr); }
+  .pulse-member-sidebar { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 6px 16px; border-top: 1px solid #342c21; border-left: 0; }
+  .pulse-member-heading { grid-column: 1 / -1; }
+  .pulse-role-heading { margin-top: 7px; }
+  .pulse-role-help, #pulse-role-status { grid-column: 1 / -1; }
+}
+
+@media (max-width: 650px) {
+  .pulse-page { width: min(100% - 24px, 1440px); padding-top: 22px; }
+  .pulse-page > .page-head { margin-bottom: 13px; }
+  .pulse-page > .page-head .lead { font-size: 10px; }
+  .pulse-workspace { min-height: 720px; grid-template-columns: 1fr; }
+  .pulse-channel-sidebar { max-height: 340px; overflow-y: auto; border-right: 0; border-bottom: 1px solid #342c21; }
+  .pulse-sidebar-heading { padding: 10px 12px; }
+  .pulse-channel-list { max-height: 120px; min-height: 70px; flex: none; display: flex; gap: 14px; overflow: auto; }
+  .pulse-channel-group { min-width: max-content; margin: 5px 0; }
+  .pulse-channel-group h3 { margin-left: 8px; }
+  .pulse-channel { width: auto; min-width: 118px; }
+  .pulse-friends { display: block; flex: none; padding-bottom: 8px; }
+  .pulse-friend-list { max-height: 60px; }
+  .pulse-self { padding: 8px 12px; }
+  .pulse-conversation { min-height: 440px; }
+  .pulse-channel-header { min-height: 62px; padding: 10px 12px; }
+  .pulse-channel-title p { max-width: 170px; }
+  .pulse-message-search { width: 40%; }
+  .pulse-message-list { padding: 10px 8px; }
+  .pulse-compose { margin: 0 9px; }
+  .pulse-composer-hint { margin-left: 12px; }
+  .pulse-member-sidebar { grid-template-columns: 1fr; padding: 12px; }
+  .pulse-member-heading, .pulse-role-help, #pulse-role-status { grid-column: auto; }
+  .pulse-member-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

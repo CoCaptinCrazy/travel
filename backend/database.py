@@ -58,7 +58,19 @@ def initialize():
             CREATE TABLE IF NOT EXISTS chat_rooms (
                 id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL UNIQUE,
+                category TEXT NOT NULL DEFAULT 'Community',
+                description TEXT NOT NULL DEFAULT '',
+                read_role TEXT NOT NULL DEFAULT 'member'
+                    CHECK (read_role IN ('member', 'moderator', 'admin')),
+                write_role TEXT NOT NULL DEFAULT 'member'
+                    CHECK (write_role IN ('member', 'moderator', 'admin')),
                 created_at TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS chat_memberships (
+                user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+                role TEXT NOT NULL CHECK (role IN ('member', 'moderator')),
+                assigned_by INTEGER NOT NULL REFERENCES users(id),
+                assigned_at TEXT NOT NULL
             );
             CREATE TABLE IF NOT EXISTS chat_messages (
                 id INTEGER PRIMARY KEY,
@@ -127,6 +139,60 @@ def initialize():
             INSERT OR IGNORE INTO chat_rooms (id, name, created_at)
                 VALUES (1, 'lobby', '2026-01-01T00:00:00+00:00');
             """
+        )
+        room_columns = {
+            row["name"] for row in db.execute("PRAGMA table_info(chat_rooms)")
+        }
+        for column, definition in (
+            ("category", "TEXT NOT NULL DEFAULT 'Community'"),
+            ("description", "TEXT NOT NULL DEFAULT ''"),
+            ("read_role", "TEXT NOT NULL DEFAULT 'member'"),
+            ("write_role", "TEXT NOT NULL DEFAULT 'member'"),
+        ):
+            if column not in room_columns:
+                db.execute(f"ALTER TABLE chat_rooms ADD COLUMN {column} {definition}")
+        db.execute(
+            "UPDATE chat_rooms SET category = 'Start here', "
+            "description = 'A place to say hello and get settled.' WHERE name = 'lobby'"
+        )
+        db.executemany(
+            "INSERT OR IGNORE INTO chat_rooms "
+            "(name, category, description, read_role, write_role, created_at) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                (
+                    "introductions",
+                    "Start here",
+                    "Meet the people in your TravelX community.",
+                    "member",
+                    "member",
+                    "2026-01-01T00:00:00+00:00",
+                ),
+                (
+                    "ideas",
+                    "Community",
+                    "Share suggestions and things you are making.",
+                    "member",
+                    "member",
+                    "2026-01-01T00:00:00+00:00",
+                ),
+                (
+                    "announcements",
+                    "Community",
+                    "News and updates from the moderators.",
+                    "member",
+                    "moderator",
+                    "2026-01-01T00:00:00+00:00",
+                ),
+                (
+                    "staff",
+                    "Staff",
+                    "A private room for moderators and admins.",
+                    "moderator",
+                    "moderator",
+                    "2026-01-01T00:00:00+00:00",
+                ),
+            ],
         )
         db.executemany(
             "INSERT OR IGNORE INTO games (id, title, description, category) VALUES (?, ?, ?, ?)",
