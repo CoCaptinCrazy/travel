@@ -79,6 +79,7 @@ export function bindArcade() {
       ticStatus.textContent = "X goes first.";
       cells.forEach((cell) => {
         cell.textContent = "";
+        cell.setAttribute("aria-label", `Square ${Number(cell.dataset.ticCell) + 1}`);
         cell.disabled = false;
       });
     };

@@ -1,8 +1,8 @@
-import re
 import json
+import re
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlencode
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 from backend.config import TMDB_API_KEY, has_configured_secret
 from backend.database import connect
@@ -24,12 +24,15 @@ GENRES = {
 
 def _fetch_tmdb(query):
     endpoint = "/search/movie" if query else "/movie/popular"
-    parameters = {"api_key": TMDB_API_KEY, "language": "en-US", "page": 1}
+    parameters = {"language": "en-US", "page": 1}
     if query:
         parameters["query"] = query
-    request_url = f"{TMDB_API_URL}{endpoint}?{urlencode(parameters)}"
+    request = Request(
+        f"{TMDB_API_URL}{endpoint}?{urlencode(parameters)}",
+        headers={"Authorization": f"Bearer {TMDB_API_KEY}", "Accept": "application/json"},
+    )
     try:
-        with urlopen(request_url, timeout=12) as response:
+        with urlopen(request, timeout=12) as response:
             result = json.loads(response.read().decode("utf-8"))
     except HTTPError as error:
         raise ValueError(f"TMDB returned HTTP {error.code}. Check the TMDB_API_KEY.") from error
@@ -61,7 +64,11 @@ def _remote_movies(query, user_id):
             description = overview.strip()[:1000] if isinstance(overview, str) else ""
             genre_ids = item.get("genre_ids", [])
             genre = next(
-                (GENRES.get(genre_id) for genre_id in genre_ids if genre_id in GENRES),
+                (
+                    GENRES[genre_id]
+                    for genre_id in genre_ids
+                    if isinstance(genre_id, int) and genre_id in GENRES
+                ),
                 "Movie",
             ) if isinstance(genre_ids, list) else "Movie"
             movie_id = f"tmdb-{item['id']}"
@@ -74,7 +81,11 @@ def _remote_movies(query, user_id):
             poster_path = item.get("poster_path")
             poster_url = (
                 f"{TMDB_IMAGE_URL}/{poster_path.lstrip('/')}"
-                if isinstance(poster_path, str) and poster_path.startswith("/")
+                if (
+                    isinstance(poster_path, str)
+                    and re.fullmatch(r"/[A-Za-z0-9._/-]+", poster_path)
+                    and ".." not in poster_path
+                )
                 else None
             )
             movies.append(

@@ -1,6 +1,5 @@
 import json
 from urllib.error import HTTPError, URLError
-from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 
@@ -10,14 +9,11 @@ class GeminiProviderError(Exception):
 
 def generate(prompt, api_key):
     model = "gemini-2.5-flash"
-    url = (
-        "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"{model}:generateContent?key={quote(api_key)}"
-    )
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     request = Request(
         url,
         data=json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
+        headers={"Content-Type": "application/json", "x-goog-api-key": api_key},
         method="POST",
     )
     try:

@@ -6,7 +6,7 @@ const services = [
   ["SoundCloud", "Open SoundCloud or embed a public track or playlist.", "https://soundcloud.com/"],
 ];
 
-function providerEmbed(value) {
+export function providerEmbed(value) {
   let url;
   try {
     url = new URL(value);
@@ -16,6 +16,9 @@ function providerEmbed(value) {
   if (url.protocol !== "https:") {
     throw new Error("Music embeds must use a secure HTTPS link.");
   }
+  if (url.username || url.password || (url.port && url.port !== "443")) {
+    throw new Error("Use a standard public link without embedded credentials.");
+  }
   if (url.hostname === "open.spotify.com") {
     const match = url.pathname.match(/^\/(track|album|playlist|episode|show)\/([A-Za-z0-9]+)\/?$/);
     if (!match) throw new Error("Use a public Spotify track, album, playlist, episode, or show link.");
@@ -23,13 +26,15 @@ function providerEmbed(value) {
   }
   if (["music.youtube.com", "youtube.com", "www.youtube.com", "youtu.be"].includes(url.hostname)) {
     const playlist = url.searchParams.get("list");
-    if (playlist && /^[A-Za-z0-9_-]+$/.test(playlist)) {
+    if (playlist && /^[A-Za-z0-9_-]+$/.test(playlist)
+        && ["/playlist", "/watch"].includes(url.pathname)) {
       return `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(playlist)}`;
     }
     const videoId = url.hostname === "youtu.be"
       ? url.pathname.slice(1)
       : url.searchParams.get("v");
-    if (videoId && /^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+    if (videoId && /^[A-Za-z0-9_-]{11}$/.test(videoId)
+        && (url.hostname === "youtu.be" || ["/watch", "/shorts"].includes(url.pathname))) {
       return `https://www.youtube-nocookie.com/embed/${videoId}`;
     }
     throw new Error("Use a public YouTube Music video or playlist link.");

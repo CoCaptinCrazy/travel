@@ -49,6 +49,7 @@ export function bindCinema() {
     const query = new FormData(form).get("query").trim();
     const status = document.querySelector("#movie-status");
     const results = document.querySelector("#movie-results");
+    status.className = "small muted";
     status.textContent = "Searching…";
     try {
       const data = await api(`/api/movies?q=${encodeURIComponent(query)}`);
