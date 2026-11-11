@@ -31,6 +31,11 @@ export async function api(path, options = {}) {
   try {
     result = await response.json();
   } catch (error) {
+    if (response.status === 403) {
+      throw new Error(
+        "The request was blocked (403) by a server that did not return TravelX's API response. Start TravelX with `python -m backend.app` and open the address it prints (by default, http://127.0.0.1:3000), not a static-file server."
+      );
+    }
     throw new Error(`The server returned an unreadable response (${response.status}).`);
   }
   if (!response.ok || !result.ok) {
