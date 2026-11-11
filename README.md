@@ -16,6 +16,8 @@ python -m backend.app
 
 Then open [http://127.0.0.1:3000](http://127.0.0.1:3000). The server binds to loopback by default. Set `TRAVELX_PORT` to choose another port, `TRAVELX_DB` to choose the SQLite database path, and `TRAVELX_COOKIE_SECURE=1` plus `TRAVELX_ORIGIN=https://your-host` when serving behind HTTPS.
 
+Optional local settings can go in the repository-root `.env` file. Existing process environment variables take precedence. Keep secrets in `.env`; it is excluded from version control.
+
 Register an account from the page. Passwords are stored as salted scrypt hashes. The local database is created at `databases/travelx.db`; it is runtime data and should not be committed.
 
 To grant administrator access to an existing account, run `python -m backend.admin_cli USERNAME` from the project directory.
