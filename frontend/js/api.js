@@ -10,13 +10,23 @@ export async function api(path, options = {}) {
     headers.set("X-CSRF-Token", csrfToken);
   }
 
-  const response = await fetch(path, {
-    ...options,
-    method,
-    headers,
-    credentials: "same-origin",
-    body: options.body === undefined ? undefined : JSON.stringify(options.body),
-  });
+  let response;
+  try {
+    response = await fetch(path, {
+      ...options,
+      method,
+      headers,
+      credentials: "same-origin",
+      body: options.body === undefined ? undefined : JSON.stringify(options.body),
+    });
+  } catch (error) {
+    if (error instanceof TypeError) {
+      throw new Error(
+        "TravelX cannot reach its server. From the project folder, run `python -m backend.app` and keep that terminal open, then reload this page."
+      );
+    }
+    throw error;
+  }
   let result;
   try {
     result = await response.json();
