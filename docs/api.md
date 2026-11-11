@@ -16,7 +16,7 @@ All API routes are same-origin and return JSON in the form `{ "ok": true, "data"
 
 Nova uses `GEMINI_API_KEY` first and, if Gemini fails, falls back to the GitHub Copilot SDK when enabled. The SDK uses the local Copilot CLI sign-in or `COPILOT_GITHUB_TOKEN`; there is no separate Copilot API key. Copilot is configured with no tools or workspace context. Provider credentials remain server-side, and placeholder credentials are treated as unconfigured.
 
-Cinema uses local sample metadata without a `TMDB_API_KEY`; with a valid key, `GET /api/movies?q={query}` searches TMDB and `GET /api/movies` returns popular titles. TMDB metadata is persisted locally so watchlists and reviews work for those titles. TravelX does not provide movie streams.
+Cinema uses local sample metadata without a `TMDB_API_KEY`; with a TMDB API read access token configured in that setting, `GET /api/movies?q={query}` searches TMDB and `GET /api/movies` returns popular titles. TMDB metadata is persisted locally so watchlists and reviews work for those titles. TravelX does not provide movie streams.
 
 Music playback is embedded in the browser from public Spotify, YouTube Music, and SoundCloud URLs. Their API credentials in `.env` are optional and are not needed for official embeds; TravelX does not host or download music.
 

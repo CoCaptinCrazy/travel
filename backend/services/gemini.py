@@ -21,7 +21,7 @@ def generate(prompt, api_key):
             result = json.loads(response.read().decode("utf-8"))
     except HTTPError as error:
         raise GeminiProviderError(f"Gemini returned HTTP {error.code}.") from error
-    except (URLError, TimeoutError, json.JSONDecodeError, UnicodeDecodeError) as error:
+    except (URLError, OSError, TimeoutError, json.JSONDecodeError, UnicodeDecodeError) as error:
         raise GeminiProviderError(
             "Gemini could not be reached or returned invalid data."
         ) from error

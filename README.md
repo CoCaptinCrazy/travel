@@ -28,7 +28,7 @@ Run the local helper tests with `python -m unittest discover -s tests`. The same
 
 ## Notes
 
-- The browser opens web addresses directly in the user's browser; TravelX does not proxy or embed external websites.
+- The Orbit browser opens web addresses directly and does not proxy or embed arbitrary external websites. Music embeds only official provider players.
 - Chat is local and refreshes by polling. Nova sends prompts to configured providers; prompts and provider credentials are sent only to those providers.
 - Arcade includes locally implemented games. Cinema uses sample metadata until TMDB is configured; it links to trailer search results and does not host or stream films.
 - Music embeds public content using official third-party players. Playback depends on each provider and its account/region requirements.

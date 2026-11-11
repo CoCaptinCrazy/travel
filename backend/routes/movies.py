@@ -36,7 +36,7 @@ def _fetch_tmdb(query):
             result = json.loads(response.read().decode("utf-8"))
     except HTTPError as error:
         raise ValueError(f"TMDB returned HTTP {error.code}. Check the TMDB_API_KEY.") from error
-    except (URLError, TimeoutError, json.JSONDecodeError, UnicodeDecodeError) as error:
+    except (URLError, OSError, TimeoutError, json.JSONDecodeError, UnicodeDecodeError) as error:
         raise ValueError("TMDB could not be reached or returned invalid data.") from error
     if not isinstance(result, dict) or not isinstance(result.get("results"), list):
         raise ValueError("TMDB returned an unexpected catalog response.")
