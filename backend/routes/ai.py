@@ -1,4 +1,5 @@
 import asyncio
+import os
 
 from backend.config import (
     COPILOT_GITHUB_TOKEN,
@@ -8,6 +9,7 @@ from backend.config import (
 )
 from backend.middleware.logging import logger
 from backend.models.response import failure, success
+from backend.routes import require_user
 from backend.services.gemini import GeminiProviderError, generate as generate_gemini
 
 
@@ -54,10 +56,23 @@ def _copilot_reply(prompt):
             if has_configured_secret(COPILOT_GITHUB_TOKEN)
             else None
         )
+        runtime_env = os.environ.copy()
+        for key in (
+            "GEMINI_API_KEY",
+            "TMDB_API_KEY",
+            "SPOTIFY_CLIENT_ID",
+            "SPOTIFY_CLIENT_SECRET",
+            "YOUTUBE_MUSIC_API_KEY",
+            "SOUNDCLOUD_CLIENT_ID",
+        ):
+            runtime_env.pop(key, None)
+        if token is None:
+            runtime_env.pop("COPILOT_GITHUB_TOKEN", None)
         async with CopilotClient(
             github_token=token,
             use_logged_in_user=not bool(token),
             telemetry=None,
+            env=runtime_env,
         ) as client:
             async with await client.create_session(
                 available_tools=[],
@@ -96,6 +111,9 @@ def handle(context):
         providers = _configured_providers()
         return success({"models": providers, "available": bool(providers)})
     if context.path == "/api/ai/chat" and context.method == "POST":
+        denied = require_user(context)
+        if denied:
+            return denied
         prompt = context.data.get("prompt")
         if not isinstance(prompt, str) or not prompt.strip() or len(prompt) > 8000:
             return failure("Prompt must be between 1 and 8000 characters.")

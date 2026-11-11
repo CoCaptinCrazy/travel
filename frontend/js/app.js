@@ -57,7 +57,9 @@ async function loadView(route) {
     case "pulse":
       return user ? renderChat(user) : `<section class="page-head"><p class="eyebrow">Pulse</p><h1>Room to talk</h1><p class="lead">Sign in to join local rooms and chat with other TravelX users.</p><a class="button" href="#/login">Sign in</a></section>`;
     case "nova":
-      return renderAI();
+      return user
+        ? renderAI()
+        : `<section class="page-head"><p class="eyebrow">Nova</p><h1>A quiet place to think</h1><p class="lead">Sign in to use your configured AI providers.</p><a class="button" href="#/login">Sign in</a></section>`;
     case "music":
       return renderMusic();
     case "marketplace":
