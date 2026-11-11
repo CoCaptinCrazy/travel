@@ -1,2 +1,1 @@
-# Optional SDK for Nova's GitHub Copilot fallback.
 github-copilot-sdk==1.0.31
